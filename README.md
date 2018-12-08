@@ -26,7 +26,7 @@ Groupe :
 - [ ] Stocker data BDD InfluxDB
 - [ ] Tester qualité lien LoRa
 - [ ] Réglage seuil limite polluants
-- [ ] Localisation
+- [ ] Localisation ?
 - [ ] Envoi de données au réseau TTN(TheThingsNetwork)
 - [ ] Développer interface locale
 - [ ] Développer interface à distance
