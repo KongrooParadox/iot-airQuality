@@ -2,11 +2,6 @@
 
 Technologie utilisée : __LoRa__
 
-Groupe : 
-- ZAANOUNY Israa
-- NANTY Guillaume
-
-
 ## Matériel
 - Raspberry Pi 3 Model B
 - Pi 3 Click Shield
