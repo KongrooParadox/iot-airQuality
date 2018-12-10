@@ -17,15 +17,15 @@ Technologie utilisée : __LoRa__
 - [X] Communication Bus I2C, GPIO
 - [X] Communication SSH
 - [X] Récupération données capteurs 
-- [ ] Installation et configuration base de données InfluxDB
-- [ ] Stocker data BDD InfluxDB
-- [ ] Tester qualité lien LoRa
-- [ ] Réglage seuil limite polluants
-- [ ] Localisation ?
+- [X] Installation et configuration base de données InfluxDB
+- [X] Stocker data BDD InfluxDB
+- [ ] Commenter le code existant
 - [ ] Envoi de données au réseau TTN(TheThingsNetwork)
+- [ ] Tester qualité lien LoRa
+- [ ] Localisation ?
+- [ ] Réglage seuil limite polluants
 - [ ] Développer interface locale
 - [ ] Développer interface à distance
-- [ ] TBD
 
 
 ## Outils utilisés
@@ -42,6 +42,10 @@ Technologie utilisée : __LoRa__
 - Communication capteurs
 - Définition d'outils collaboratifs
 
+### 10 Décembre
+- Création base de données InfluxDB
+- Ajout de données des capteurs dans BDD (appdb.py)
+- Redaction ébauche du rapport
 
 ## Edition de fichiers à distance avec SublimeText3
 
@@ -72,6 +76,8 @@ Dans Sublime Text 3, ouvrir Package Manager (Ctrl-Shift-P sur Linux/Win, Cmd-Shi
 
 ## Sources :
 - [pigpio](http://abyz.me.uk/rpi/pigpio/python.htm)
-- [InfluxDB & Grafana](https://bentek.fr/influxdb-grafana-raspberry-pi/)
+- [Tuto InfluxDB & Grafana](https://bentek.fr/influxdb-grafana-raspberry-pi/)
 - [i2c](https://raspberrypi.stackexchange.com/questions/79091/smbus-i2c-sensor-returns-fixed-data)
 - [Mosquitto](https://bentek.fr/mosquitto-node-red-raspberry-pi/)
+- [Doc InfluxDB](https://docs.influxdata.com/influxdb/v1.7/introduction/getting-started/)
+- [InfluxDB Python](https://github.com/influxdata/influxdb-python/)

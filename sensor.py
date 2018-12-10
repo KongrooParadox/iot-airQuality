@@ -4,8 +4,15 @@ import pigpio
 import subprocess
 import Adafruit_DHT as dht
 from datetime import datetime
+from influxdb import InfluxDBClient
+from datetime import datetime
+ 
 
 DELAY = 10
+HOST = 'localhost'
+DBNAME = 'iot'
+USER = 'pi'
+PWD = 'raspberry'
 
 def init():
 	print('############################################\n\tRunning sensor.py\n############################################')
@@ -28,6 +35,13 @@ def main():
  
 		air = pi.i2c_open(1, 0x5a)
 
+		client = InfluxDBClient(HOST, 8086, USER, PWD, DBNAME)
+
+		client.create_database(DBNAME)
+
+		print("Create retention policy")
+		client.create_retention_policy('one_day_only', '1d', 1, default=True)
+
 		while(1):
 			c, d = pi.i2c_read_device(air, 9)
 			h,t = dht.read_retry(dht.DHT22, 8)
@@ -39,12 +53,29 @@ def main():
 			if(tvoc > 700):
 				print('Attention taux TVOC dangereux!!!')
 			
-			print('#### {:%d/%m/%Y %H:%M:%S} ####'.format(datetime.now()))
-			print('Température : {:.02f} °C'.format(t) )
-			print('Humidité : {:.02f} %'.format(h) )
-			print('CO2 (ppm) [450-2000] : %s' % co2)
-			print('TVOC (ppb) [125-600] : %s' % tvoc)
-			print('')
+			# print('#### {:%d/%m/%Y %H:%M:%S} ####'.format(datetime.now()))
+			# print('Température : {:.02f} °C'.format(t) )
+			# print('Humidité : {:.02f} %'.format(h) )
+			# print('CO2 (ppm) [450-2000] : %s' % co2)
+			# print('TVOC (ppb) [125-600] : %s' % tvoc)
+			# print('')
+
+			# int(past_date.strftime('%s'))
+			maintenant = datetime.now()
+			iot = [
+			        {
+			            "measurement": "mesures",
+			            "time": maintenant,
+			            "fields": {
+			                "temperature": t,
+			                "humidite":h,
+			                "co2":co2,
+			                "tvoc":tvoc
+			            }
+			        }
+			    ]	
+			print("Write points #: {0}".format(iot))
+			client.write_points(iot, retention_policy='one_day_only')
 			time.sleep(DELAY)
 
 	finally:
@@ -52,7 +83,8 @@ def main():
 			pi.i2c_close(air)
 			pi.stop()
 			close()
-		
+			print("Drop database: {}".format(DBNAME))
+			client.drop_database(DBNAME)
 		except:
 			close()
 
