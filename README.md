@@ -74,6 +74,44 @@ Dans Sublime Text 3, ouvrir Package Manager (Ctrl-Shift-P sur Linux/Win, Cmd-Shi
 
 4. Le fichier va s'ouvrir automatiquement sur SublimeText
 
+## Mosquitto
+
+N.B : Commandes à exécuter en tant que super-user
+
+### Installation
+```
+wget http://repo.mosquitto.org/debian/mosquitto-repo.gpg.key
+apt-key add mosquitto-repo.gpg.key
+cd /etc/apt/sources.list.d/
+wget http://repo.mosquitto.org/debian/mosquitto-stretch.list
+apt update -y
+apt install -y mosquitto mosquitto-clients
+```
+### Configuration
+```
+echo "# Place your local configuration in /etc/mosquitto/conf.d/
+#
+# A full description of the configuration file is at
+# /usr/share/doc/mosquitto/examples/mosquitto.conf.example
+
+pid_file /var/run/mosquitto.pid
+
+persistence true
+persistence_location /var/lib/mosquitto/
+
+log_dest topic
+
+log_type error
+log_type warning
+log_type notice
+log_type information
+
+connection_messages true
+log_timestamp true
+
+include_dir /etc/mosquitto/conf.d" > /etc/mosquitto/mosquitto.conf
+```
+
 ## Node-RED
 
 Noeuds à installer :
