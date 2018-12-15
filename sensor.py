@@ -16,12 +16,16 @@ PWD = 'raspberry'
 
 def init():
 	print('############################################\n\tRunning sensor.py\n############################################')
+	# On démarre le daemon pigpiod pour pouvoir accéder aux données de notre capteur GPIO
 	start_command = 'sudo pigpiod'
+	# Permet d'éxécuter la commande bash ci-dessus
 	subprocess.call(start_command.split())
 	time.sleep(1)	 
 
 def close():
+	# On ferme le daemon pigpiod pour économiser de l'énergie
 	stop_command = 'sudo killall pigpiod'
+	# Permet d'éxécuter la commande bash ci-dessus
 	subprocess.call(stop_command.split())
 	print('\n############################################\n\tExiting sensor.py\n############################################')
 
@@ -83,8 +87,6 @@ def main():
 			pi.i2c_close(air)
 			pi.stop()
 			close()
-			print("Drop database: {}".format(DBNAME))
-			client.drop_database(DBNAME)
 		except:
 			close()
 
