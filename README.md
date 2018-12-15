@@ -20,6 +20,7 @@ Technologie utilisée : __LoRa__
 - [X] Installation et configuration base de données InfluxDB
 - [X] Stocker data BDD InfluxDB
 - [ ] Commenter le code existant
+- [ ] Envoi MQTT depuis et vers InfluxDB
 - [ ] Envoi de données au réseau TTN(TheThingsNetwork)
 - [ ] Tester qualité lien LoRa
 - [ ] Localisation ?
