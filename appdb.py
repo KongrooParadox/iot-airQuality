@@ -4,7 +4,7 @@ import subprocess
 from random import uniform
 from datetime import datetime
 from influxdb import InfluxDBClient
- 
+import sensor
 
 DELAY = 900 # 15 minutes entre les saisies
 HOST = 'localhost'
@@ -22,10 +22,12 @@ def main():
 		# client.create_retention_policy('one_day_only', '1d', 1, default=True)
 
 		while(1):
-			h = round(uniform(0, 100), 2)
-			t = round(uniform(10, 40), 2)
-			tvoc = round(uniform(125, 800), 0)
-			co2 = round(uniform(450, 2500), 0)
+			h, t, tvoc, co2 = sensor.main()
+
+			# h = round(uniform(0, 100), 2)
+			# t = round(uniform(10, 40), 2)
+			# tvoc = round(uniform(125, 800), 0)
+			# co2 = round(uniform(450, 2500), 0)
 
 			# print('#### {:%d/%m/%Y %H:%M:%S} ####'.format(datetime.now()))
 			# print('Température : {:.02f} °C'.format(t) )
