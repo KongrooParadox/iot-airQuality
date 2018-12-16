@@ -117,6 +117,8 @@ include_dir /etc/mosquitto/conf.d" > /etc/mosquitto/mosquitto.conf
 Noeuds à installer :
 - node-red-contrib-influxdb
 - node-red-dashboard
+- node-red-contrib-ttn
+- node-red-contrib-i2c
 
 ### Dashboard local écran LCD
 
@@ -140,6 +142,25 @@ Une fois que le flow est deployé on peut y accéder à l'URL locale suivante :
 ```
 [{"id":"c559291c.a3fb98","type":"tab","label":"MQTT to InfluxDB","disabled":false,"info":""},{"id":"ecf7eed5.6e4058","type":"mqtt in","z":"c559291c.a3fb98","name":"","topic":"mesures","qos":"2","broker":"70398119.e1fed8","x":170,"y":220,"wires":[["86b56590.048818","cb9efc45.b6ef38"]]},{"id":"cb9efc45.b6ef38","type":"debug","z":"c559291c.a3fb98","name":"mqtt_output","active":true,"tosidebar":true,"console":false,"tostatus":false,"complete":"payload","x":470,"y":360,"wires":[]},{"id":"9b3b3bdf.412348","type":"debug","z":"c559291c.a3fb98","name":"DB_output","active":true,"tosidebar":true,"console":false,"tostatus":false,"complete":"payload","x":890,"y":160,"wires":[]},{"id":"86b56590.048818","type":"function","z":"c559291c.a3fb98","name":"prepareQuery","func":"\nreturn msg;","outputs":1,"noerr":0,"x":530,"y":240,"wires":[["be821d9d.87bc7","9b3b3bdf.412348"]]},{"id":"be821d9d.87bc7","type":"influxdb out","z":"c559291c.a3fb98","influxdb":"10575c76.e6486c","name":"InfluxDB","measurement":"mesures","precision":"","retentionPolicy":"","x":940,"y":300,"wires":[]},{"id":"70398119.e1fed8","type":"mqtt-broker","z":"","name":"Mosquitto","broker":"localhost","port":"1883","clientid":"","usetls":false,"compatmode":true,"keepalive":"60","cleansession":true,"birthTopic":"","birthQos":"0","birthPayload":"","closeTopic":"","closeQos":"0","closePayload":"","willTopic":"","willQos":"0","willPayload":""},{"id":"10575c76.e6486c","type":"influxdb","z":"","hostname":"127.0.0.1","port":"8086","protocol":"http","database":"iot","name":"Mesures Capteurs","usetls":false,"tls":""}]
 ```
+
+## Grafana
+
+### Installation
+
+N.B : Commandes à exécuter en tant que super-user
+
+```
+apt-get install apt-transport-https curl
+curl https://bintray.com/user/downloadSubjectPublicKey?username=bintray | apt-key add -
+echo "deb https://dl.bintray.com/fg2it/deb stretch main" | tee -a /etc/apt/sources.list.d/grafana.list
+apt-get update
+apt-get install grafana
+```
+
+### Snapshots
+
+Test local valeurs aléatoires :
+`https://snapshot.raintank.io/dashboard/snapshot/hUF28epCMuX21HWwLnJFc8arkGKaPmZ2?orgId=2&from=1544914355647&to=1544933863699`
 
 ## Sources :
 - [pigpio](http://abyz.me.uk/rpi/pigpio/python.html)
