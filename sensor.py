@@ -1,15 +1,14 @@
+# -*- coding: utf-8 -*
 #!/usr/bin/env python
 import time
 import pigpio
 import subprocess
 import Adafruit_DHT as dht
 from datetime import datetime
-from influxdb import InfluxDBClient
-from datetime import datetime
 
 
 def init():
-	print('############################################\n\tRunning sensor.py\n############################################')
+	#print('############################################\n\tRunning sensor.py\n############################################')
 	# On démarre le daemon pigpiod pour pouvoir accéder aux données de notre capteur GPIO
 	start_command = 'sudo pigpiod'
 	# Permet d'éxécuter la commande bash ci-dessus
@@ -21,7 +20,7 @@ def close():
 	stop_command = 'sudo killall pigpiod'
 	# Permet d'éxécuter la commande bash ci-dessus
 	subprocess.call(stop_command.split())
-	print('\n############################################\n\tExiting sensor.py\n############################################')
+	#print('\n############################################\n\tExiting sensor.py\n############################################')
 
 def main():
 	try:
@@ -34,13 +33,14 @@ def main():
 		air = pi.i2c_open(1, 0x5a)
 		c, d = pi.i2c_read_device(air, 9)
 		h,t = dht.read_retry(dht.DHT22, 8)
-
+		h = round(h, 2)
+		t = round(t, 2)
 		tvoc = d[7] * 256 + d[8]
-		co2 = (d[0] * 256) + d[1] 
-		if(co2 > 2500):
-			print('Attention taux de CO2 dangereux !!!')
-		if(tvoc > 700):
-			print('Attention taux TVOC dangereux!!!')
+		co2 = d[0] * 256 + d[1] 
+		# if(co2 > 2500):
+		# 	print('Attention taux de CO2 dangereux !!!')
+		# if(tvoc > 700):
+		# 	print('Attention taux TVOC dangereux!!!')
 
 		# print('#### {:%d/%m/%Y %H:%M:%S} ####'.format(datetime.now()))
 		# print('Température : {:.02f} °C'.format(t) )
@@ -55,10 +55,12 @@ def main():
 			pi.i2c_close(air)
 			pi.stop()
 			close()
+			output = ''
+			output += str(h) + ';' + str(t) + ';'+ str(tvoc) + ';' + str(co2)
+			print(output)
 			return h, t, tvoc, co2
 		except:
 			close()
-			return h, t, tvoc, co2
 
 if __name__ == '__main__':
 	main()
