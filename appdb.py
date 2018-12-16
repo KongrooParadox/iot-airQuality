@@ -16,25 +16,8 @@ def main():
 	try:
 		client = InfluxDBClient(HOST, 8086, USER, PWD, DBNAME)
 
-		# client.create_database(DBNAME)
-
-		# print("Create retention policy")
-		# client.create_retention_policy('one_day_only', '1d', 1, default=True)
-
 		while(1):
 			h, t, tvoc, co2 = sensor.main()
-
-			# h = round(uniform(0, 100), 2)
-			# t = round(uniform(10, 40), 2)
-			# tvoc = round(uniform(125, 800), 0)
-			# co2 = round(uniform(450, 2500), 0)
-
-			# print('#### {:%d/%m/%Y %H:%M:%S} ####'.format(datetime.now()))
-			# print('Température : {:.02f} °C'.format(t) )
-			# print('Humidité : {:.02f} %'.format(h) )
-			# print('CO2 (ppm) [450-2000] : %s' % co2)
-			# print('TVOC (ppb) [125-600] : %s' % tvoc)
-			# print('')
 
 			maintenant = datetime.now()
 			iot = [
