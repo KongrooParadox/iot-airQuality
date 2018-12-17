@@ -1,0 +1,119 @@
+
+<!DOCTYPE html>
+<html>
+<title> Surveillance de la qualité d'air au CERI</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-black.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<head>
+  <link rel="stylesheet" media="screen" type="text/css" href="CSS/style.css"/>
+</head>
+<body id="myPage">
+
+
+
+<!-- Navbar -->
+<div class="w3-top">
+  <div class="w3-bar w3-theme-d2 w3-left-align">
+    <a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-hover-white w3-theme-d2" href="javascript:void(0);" onclick="openNav()"><i class="fa fa-bars"></i></a>
+    <a href="#" class="w3-bar-item w3-button w3-teal"><i class="fa fa-home w3-margin-right"></i>Accueil</a>
+    <a href="#admin" class="w3-bar-item w3-button w3-hide-small w3-hover-white">Administration</a>
+  <!--
+    <a href="#team" class="w3-bar-item w3-button w3-hide-small w3-hover-white">Équipe</a>
+    <a href="#contact" class="w3-bar-item w3-button w3-hide-small w3-hover-white">Contact</a>   
+  -->
+  </div>
+</div>
+
+
+
+
+<!-- Image Header -->
+
+<img src="Air_Quality.png" alt="boat" style="width:100%;min-height:450px;max-height:1000px;">
+
+
+<!-- Projet Row -->
+<div class="w3-row-padding w3-center w3-padding-64" id="admin">
+ 
+    <h2>Interface d'administration locale</span></h2>
+    <p align="left">
+      <div><br><h2><span class="w3-xlarge w3-border-teal w3-bottombar">Mesures actuelles</span></h2>
+          <iframe src="http://192.168.1.16:3000/d-solo/8xZBlXiRk/air-quality?panelId=8&orgId=1&kiosk" width="400" height="300" frameborder="0" seamless="seamless"></iframe>
+          <iframe src="http://192.168.1.16:3000/d-solo/8xZBlXiRk/air-quality?panelId=9&orgId=1" scrolling="no" width="400" height="300" frameborder="0"></iframe>
+          <iframe src="http://192.168.1.16:3000/d-solo/8xZBlXiRk/air-quality?panelId=10&orgId=1" scrolling="no" width="400" height="300" frameborder="0"></iframe>
+          <iframe src="http://192.168.1.16:3000/d-solo/8xZBlXiRk/air-quality?panelId=11&orgId=1" scrolling="no" width="400" height="300" frameborder="0"></iframe>
+      </div>
+      <div>
+        <br><h2><span class="w3-xlarge w3-border-teal w3-bottombar">Historique 24 dernières heures</span></h2>
+        <iframe src="http://192.168.1.16:3000/d-solo/8xZBlXiRk/air-quality?orgId=1&from=now-24h&to=now&panelId=6" width="1400" height="300" frameborder="0"></iframe><br>
+        <iframe src="http://192.168.1.16:3000/d-solo/8xZBlXiRk/air-quality?orgId=1&from=now-24h&to=now&panelId=2" width="1400" height="300" frameborder="0"></iframe>
+      </div>
+      <br><h2><span class="w3-xlarge w3-border-teal w3-bottombar">Fixation seuil limites</span></h2>
+    </p><br>    
+
+</div>
+
+
+<!-- Team Container 
+<div class="w3-container w3-padding-64 w3-center" id="team">
+  <h2><span class="w3-xlarge w3-border-teal w3-bottombar">Notre équipe</span></h2>
+    <div class="w3-container w3-center">
+      <div class="w3-row"><br>
+        <div class="w3-quarter">
+          <span  data-tip="M1-SICOM"><img src="Photos/Israa.jpg" alt="Israa" style="width:55%" class="w3-circle w3-hover-opacity"></span>
+          <h3>ZAANOUNY Israa</h3>
+          <i class="fa fa-envelope-o" aria-hidden="true"></i><a href="mailto:israa.zaanouny@alumni.univ-avignon.fr"> israa.zaanouny@alumni.univ-avignon.fr</a><br>
+        </div>
+        <div class="w3-quarter">
+          <span  data-tip="M1-SICOM"><img src="Photos/Guillaume.png" alt="Guillaume" style="width:55%" class="w3-circle w3-hover-opacity"></span>
+          <h3>NANTY Guillaume</h3>
+          <i class="fa fa-envelope-o" aria-hidden="true"></i><a href="mailto:guillaume.nanty@alumni.univ-avignon.fr"> guillaume.nanty@alumni.univ-avignon.fr</a><br>
+        </div>
+      </div>
+    </div>
+</div>   
+-->
+
+<!-- Footer -->
+<footer>
+ 
+  <div style="position:relative;bottom:550px;z-index:1;" class="w3-tooltip w3-right">
+    <span class="w3-text w3-padding w3-teal w3-hide-small">Go To Top</span>   
+    <a class="w3-button w3-theme" href="#myPage"><span class="w3-xlarge">
+    <i class="fa fa-chevron-circle-up"></i></span></a>
+  </div>
+
+  <p> Copyright © 2018-2019 Application objets connectés. All Rights Reserved</p>
+</footer>
+
+<script>
+  // Script for side navigation
+  function w3_open() {
+      var x = document.getElementById("mySidebar");
+      x.style.width = "300px";
+      x.style.paddingTop = "10%";
+      x.style.display = "block";
+  }
+
+  // Close side navigation
+  function w3_close() {
+      document.getElementById("mySidebar").style.display = "none";
+  }
+
+  // Used to toggle the menu on smaller screens when clicking on the menu button
+  function openNav() {
+      var x = document.getElementById("navDemo");
+      if (x.className.indexOf("w3-show") == -1) {
+          x.className += " w3-show";
+      } else { 
+          x.className = x.className.replace(" w3-show", "");
+      }
+  }
+</script>
+
+</body>
+</html>
+

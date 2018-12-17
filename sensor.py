@@ -25,18 +25,24 @@ def close():
 def main():
 	try:
 		init()
+		# On initialise la librairie pigpio
 		pi = pigpio.pi()
 		if not pi.connected:
 			print('Erreur au démarrage de pigpiod')
 			init()
  
+ 		# on initialise la connexion i2c à l'adresse 0x5a
 		air = pi.i2c_open(1, 0x5a)
+
+		# On récupère les données de nos capteurs du bus i2c
 		c, d = pi.i2c_read_device(air, 9)
-		h,t = dht.read_retry(dht.DHT22, 8)
-		h = round(h, 2)
+		tvoc = d[7] * 256 + d[8] # On suit le calcul données par la documentation pour retrouver les bonnes valeurs
+		co2 = d[0] * 256 + d[1]  # Idem
+		
+		h,t = dht.read_retry(dht.DHT22, 8) # On stocke les valeurs de l'humidite et de la température depuis le PIN 8 GPIO
+		h = round(h, 2) # On arrondi à un chiffre après la virgule
 		t = round(t, 2)
-		tvoc = d[7] * 256 + d[8]
-		co2 = d[0] * 256 + d[1] 
+		
 		# if(co2 > 2500):
 		# 	print('Attention taux de CO2 dangereux !!!')
 		# if(tvoc > 700):
@@ -52,10 +58,12 @@ def main():
 
 	finally:
 		try:
+			# On ferme nos connexions ouvertes
 			pi.i2c_close(air)
 			pi.stop()
 			close()
 			output = ''
+			# On formate nos données pour les transmettre à NodeRED
 			output += str(h) + ';' + str(t) + ';'+ str(tvoc) + ';' + str(co2)
 			print(output)
 			return h, t, tvoc, co2

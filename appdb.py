@@ -17,8 +17,10 @@ def main():
 		client = InfluxDBClient(HOST, 8086, USER, PWD, DBNAME)
 
 		while(1):
+			# On récupère les données de notre capteur générées par notre script sensor.py
 			h, t, tvoc, co2 = sensor.main()
 
+			# On fixe la date d'envoi des données
 			maintenant = datetime.now()
 			iot = [
 			        {
@@ -33,7 +35,10 @@ def main():
 			        }
 			    ]	
 			print("Ajout données : {}".format(iot))
+			# On écrit nos données dans notre base de données, elles seront gardées un jour
 			client.write_points(iot, retention_policy='one_day_only')
+			
+			# On attend un certain nombre de secondes avant de relancer la boucle
 			time.sleep(DELAY)
 
 	finally:
