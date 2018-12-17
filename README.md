@@ -19,13 +19,13 @@ Technologie utilisée : __LoRa__
 - [X] Récupération données capteurs 
 - [X] Installation et configuration base de données InfluxDB
 - [X] Stocker data BDD InfluxDB
-- [ ] Commenter le code existant
-- [ ] Envoi MQTT depuis et vers InfluxDB
-- [ ] Envoi de données au réseau TTN(TheThingsNetwork)
+- [X] Commenter le code existant
+- [X] Envoi MQTT depuis et vers InfluxDB
+- [X] Envoi de données au réseau TTN(TheThingsNetwork)
+- [ ] Développer interface locale
 - [ ] Tester qualité lien LoRa
 - [ ] Localisation ?
 - [ ] Réglage seuil limite polluants
-- [ ] Développer interface locale
 - [ ] Développer interface à distance
 
 
